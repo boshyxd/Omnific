@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/projectiles/Projectile.gd" id="1_proj"]
+[ext_resource type="PackedScene" path="res://objects/projectiles/bullet.tscn" id="2_bullet"]
+
+[node name="Projectile" type="Node3D"]
+script = ExtResource("1_proj")
+Projectile_Type = "Rigidbody_Projectile"
+Projectile_Velocity = 22
+Rigid_Body_Projectile = ExtResource("2_bullet")

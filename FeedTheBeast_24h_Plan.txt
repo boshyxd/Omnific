@@ -1,0 +1,139 @@
+Feed The Beast — 24-hour game plan (FPS roguelite with ASCII+CRT post) 
+
+High concept
+- You are the Beast. Shoot and eat enemies to “feed” yourself, gaining health, XP, and coins. Level up to unlock/upgrade gun talents in a minimal skill tree. Stylized with an ASCII post-process and CRT filter.
+
+Core loop (MVP)
+1) Move + shoot ray gun (hitscan for gameplay, fast “beam/tracer” for visuals).
+2) Kill enemies to drop XP orbs and coins; eat stunned/finishing enemies for bonus heal + XP burst.
+3) Level up to spend points in a tiny skill tree (damage, attack speed, crit, lifesteal, knockback, ray speed).
+4) Survive increasing waves for 10–15 minutes; aim for escalating power fantasy.
+
+Strict scope (24h)
+- 1 weapon (ray gun). 1 beam VFX. 1 muzzle SFX with pitch based on fire rate.
+- 1 map (flat plane with a few props/obstacles). Use primitives + simple palette.
+- 2 enemy types: Grunt (melee chaser), Brute (slower, tanky, mini-knockback resist).
+- 1 ASCII post-processing pass (colored) + simple CRT filter (scanlines, vignette, slight barrel distortion, subtle chromatic aberration).
+- UI: health bar, XP bar, coin count, level-up/skill-tree screen.
+
+Controls
+- WASD move, mouse look, LMB shoot, RMB “Devour” (contextual finisher on stunned/low-HP enemy), Space jump (optional).
+
+Tight 24-hour schedule (adjust if you get ahead/behind)
+0:00–1:00 — Project setup
+- Create new project (Unity URP or Godot 4). Set version control. Make empty scene with player capsule + camera.
+- Add a color palette and simple skybox or solid color background.
+
+1:00–3:00 — Combat core
+- Implement FPS controller and raycast shooting: rate of fire, damage, crit (base 10%), and knockback impulse.
+- Visual “beam”: use a short-lived line/tracer with move speed param (visual only; damage still hitscan).
+- SFX: single shot sample; scale pitch with fire rate; add subtle shot screen shake.
+
+3:00–5:00 — Enemies + spawner
+- Grunt: Navmesh/seek behavior; contact damage. Brute: slower, higher HP, minor knockback resistance.
+- Spawner: time-based difficulty curve; maintain target enemy count.
+
+5:00–6:00 — Health/XP/Coin
+- Kills drop XP orbs and coins; pickups magnetize within short radius; XP curve levels quickly early, slows later.
+
+6:00–8:00 — Leveling + minimal Skill Tree
+- On level-up, pause and open a simple skill tree: 3 tiers x 3 nodes total (e.g., Damage I/II/III, Attack Speed I/II/III, Utility branch for Lifesteal/Knockback/Ray Speed).
+- Gate tiers by required points spent in previous tier.
+
+8:00–10:00 — Upgrades pass
+- Hook stat modifiers: damage %, attack speed %, crit %, lifesteal %, knockback %, ray visual speed.
+- Eating/Devour: RMB on stunned/low-HP target executes finisher: heal X% max HP + extra XP/coins.
+
+10:00–12:00 — ASCII post-process (first pass)
+- Start with coarse grid (e.g., 8x12 px cells). For each cell: sample average color, compute luminance, map to a small set of glyph intensities, tint glyph by average color.
+- Use a small glyph set to start: [space, '.', ':', '*', '#', '@'] with thresholds. Add ordered/Bayer dithering if time.
+
+12:00–14:00 — CRT pass (first pass)
+- Add scanlines (multiply by sin pattern), slight vignette, gentle barrel distortion, tiny chromatic aberration. Expose intensity sliders.
+
+14:00–16:00 — UI + feedback
+- Health bar, XP bar, coins, level indicator. Simple pause/level-up overlay with tree nodes.
+- Enemy hit flash, knockback feedback, death dissolve or scale pop.
+
+16:00–18:00 — Balance + pacing
+- Ensure early leveling is fast (first 2–3 minutes are power spikes). Tweak spawn curve, enemy HP, damage.
+
+18:00–20:00 — Polish essentials
+- Audio: hit SFX, devour SFX, low-health stinger. Screen shake tuning. Simple particles for beam hit.
+
+20:00–22:00 — Bugs + performance
+- Profile the ASCII shader (cell size tradeoff). Ensure stable framerate by reducing grid resolution or glyph set if needed.
+
+22:00–24:00 — Final pass + build
+- Title screen with “Start/Exit”, short how-to. Build and smoke test.
+
+Stats and tuning (start values; adjust during balance pass)
+- Player: 100 HP; move speed 5 m/s; base regen 0.
+- Gun: 10 dmg, 4 shots/s, 10% crit, 2.0x crit mult, knockback 6 impulse, lifesteal 0%.
+- Upgrades (each rank): +10% dmg, +15% attack speed, +5% crit chance, +25% knockback, +2% lifesteal, +30% ray visual speed.
+- Enemies: Grunt 40 HP, speed 3; Brute 150 HP, speed 2, 50% knockback taken.
+- XP curve: lvl_n = floor(10 + n^1.6). Drop XP scaled to enemy max HP.
+
+Minimal skill tree (example)
+- Tier 1 (requires 0): Damage I (+10% dmg), Rapid Fire I (+15% atk spd), Predatory I (+2% lifesteal)
+- Tier 2 (requires 2 points in Tier 1): Precision I (+5% crit), Kinetic I (+25% knockback), Velocity I (+30% ray speed)
+- Tier 3 (requires 5 points total): Damage II (+10% dmg), Rapid Fire II (+15% atk spd), Precision II (+5% crit)
+- Optional capstone if time: Feeding Frenzy (+50% lifesteal for 3s after Devour)
+
+Implementation blueprint (engine-agnostic)
+- Player: CharacterController or KinematicBody; camera bob optional.
+- Weapon: Timer-based fire; raycast hit; damage, crit, knockback; visual tracer object with speed param; beam hit VFX.
+- Enemies: Simple state machine (Chase, Stunned, Dead). Stun on low HP or on heavy knockback to enable Devour.
+- Spawner: Maintain target population with difficulty curve over time; spawn rings around player.
+- Pickups: XP/coin orbs with magnet behavior (lerp when within radius).
+- Level + Skill Tree: Maintain stats struct; tree as list of nodes with prerequisites; apply multipliers on change; persist current points.
+- Save (optional): Session-only; not required for jam.
+
+Unity quickstart (fastest path if you know Unity)
+- Use URP (Universal Render Pipeline). Player: CharacterController + simple mouse look. Input System or legacy Input.
+- ASCII pass: URP custom full-screen pass or Shader Graph full-screen effect. Grid step: floor(uv * screen/charSize)/screen * charSize; sample average color per cell (approx via center sample); luminance -> glyph index from small atlas or procedural shapes; tint glyph by sampled color.
+- CRT pass: Additive scanlines (sin), vignette (radial falloff), barrel distortion (radial UV warp), subtle chromatic aberration (RGB offset).
+- Data: ScriptableObjects for upgrades or a single JSON/asset with node list.
+
+Godot 4 quickstart (if you prefer GDScript)
+- Use CharacterBody3D + RayCast3D for shooting. Enemies via NavigationAgent3D.
+- ASCII: CanvasItem/Spatial shader as full-screen post on a Viewport. Same grid approach; use a small glyph texture.
+- CRT: Fragment shader: scanlines + vignette + radial distortion + small per-channel offset.
+
+Fast ASCII technique (practical shortcuts)
+- Start tiny: 6 glyphs: [' ', '.', ':', '*', '#', '@'] with 5 luminance thresholds.
+- Cell size 8x12 or 10x14 pixels. If perf is bad, increase cell size.
+- For color: multiply glyph mask by average RGB of the cell.
+- Optional ordered dithering using a 4x4 Bayer matrix to reduce banding.
+
+CRT shortcuts
+- Scanlines: color *= 0.9 + 0.1 * sin(uv.y * screenHeight * 3.14159)
+- Vignette: color *= smoothstep(1.2, 0.7, length((uv-0.5)/aspect))
+- Barrel: uv += (uv-0.5) * length(uv-0.5)^2 * k; keep k small (~0.05)
+- Chromatic aberration: sample R,G,B at slightly offset UVs (±0.5–1.0 px)
+
+Data model (suggested)
+- Stats: damage, fireRate, critChance, critMult, lifesteal, knockback, rayVisualSpeed.
+- Enemy: maxHP, speed, contactDamage, knockbackResistance, xpDrop, coinDrop.
+- SkillNode: id, name, tier, cost, prereqs[], effect type, value.
+
+Devour mechanic (simple)
+- Enemy flagged “finisher-eligible” under 20% HP or after a heavy knockback. RMB within short range performs Devour: kill, heal 10% max HP, grant +50% XP of normal.
+
+Audio cues (quick wins)
+- Gun pitch scales with fire rate. Hitmarker tick on crit. Low HP heartbeat.
+
+Performance tips
+- Keep enemy count capped; pool enemies and VFX. Reduce ASCII resolution first if perf drops. Avoid per-pixel expensive math in post.
+
+Risk triage (cut list if behind)
+- Cut Brute and keep only Grunt. Cut Devour and just grant lifesteal on kill. Defer CRT if ASCII is unfinished. Reduce skill tree to Tier 1 only.
+
+Stretch (only if ahead)
+- Elite enemies, timed challenges, temporary power-ups, mini-boss at 10 minutes.
+
+Definition of done
+- Stable 60 FPS (or acceptable target) with ASCII+CRT at chosen resolution. Playable 10–15 minute session looping enemies and leveling. Build produced.
+
+Notes
+- Use primitive meshes and flat colors; the post-process will unify the look. Commit every feature milestone.

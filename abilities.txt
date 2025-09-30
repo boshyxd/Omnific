@@ -1,0 +1,152 @@
+Omnific — Abilities (stat-only version)
+
+Notes
+- Each ability below only modifies stats (no special triggers) to keep implementation simple.
+- Values are suggested Rank 1 baselines; tune to taste.
+- Icon prompts are written for a black-and-white, 1-bit, high-contrast, ASCII/glyph vibe.
+
+1) Fanged Barrel
+Effects
+- lifesteal_pct: +4%
+- devour_heal_pct_maxhp: +10%
+- damage_pct: +8%
+Icon prompt
+High-contrast black-and-white 1-bit icon of a gun barrel with small vampire fangs at the muzzle, minimalist glyph, centered, no background, crisp edges, no gray.
+
+2) Overclocked Capacitors
+Effects
+- fire_rate_pct: +25%
+- ray_visual_speed_pct: +40%
+- damage_pct: +5%
+Icon prompt
+Black-and-white 1-bit icon of paired capacitors with plus/minus terminals, simple geometric glyph, centered, no background, high contrast.
+
+3) Hollowpoint Rounds
+Effects
+- crit_chance_pct: +7%
+- crit_multiplier_pct: +20%
+Icon prompt
+1-bit black-and-white bullet with a hollow tip, bold silhouette, minimalist symbol, centered, no background.
+
+4) Kinetic Rail
+Effects
+- knockback_power_pct: +35%
+- stagger_threshold_pct: +10%
+Icon prompt
+Monochrome 1-bit diagonal rail with motion lines suggesting force, crisp, high-contrast, centered, no background.
+
+5) Feeding Frenzy Core
+Effects
+- lifesteal_pct: +3%
+- devour_heal_pct_maxhp: +15%
+- fire_rate_pct: +10%
+Icon prompt
+1-bit black-and-white pulsing core with concentric rings, aggressive vibe, high contrast, centered.
+
+6) Magnetron
+Effects
+- pickup_magnet_radius_m: +2.0
+- pickup_suction_speed_pct: +60%
+- xp_gain_pct: +10%
+Icon prompt
+Minimal 1-bit horseshoe magnet icon with subtle field lines, bold silhouette, centered, no background.
+
+7) Greed Circuit
+Effects
+- coin_gain_pct: +30%
+- luck_pct: +10%
+- xp_gain_pct: +5%
+Icon prompt
+Black-and-white 1-bit coin with circuit traces, glyph-like, centered, high contrast, no gray.
+
+8) Time Dilation Weave
+Effects
+- move_speed_pct: +12%
+- slow_power_pct: +15%
+Icon prompt
+Minimal 1-bit hourglass/grid warp motif implying time distortion, stark black and white, centered, no background.
+
+9) Voltaic Arc
+Effects
+- damage_pct: +12%
+- crit_chance_pct: +3%
+- ray_visual_speed_pct: +30%
+Icon prompt
+1-bit lightning bolt zig-zag glyph, high contrast, centered, no background.
+
+10) Shrapnel Bloom
+Effects
+- damage_pct: +8%
+- knockback_power_pct: +25%
+Icon prompt
+Black-and-white 1-bit radial burst motif (shrapnel bloom), crisp spokes, centered, high contrast.
+
+11) Hunter’s Mark
+Effects
+- damage_pct: +10%
+- xp_gain_pct: +15%
+Icon prompt
+1-bit target/reticle icon with a central dot, bold, centered, no background.
+
+12) Obsidian Heart
+Effects
+- max_hp_flat: +30
+- damage_pct: +8%
+Icon prompt
+Monochrome 1-bit broken/shard heart silhouette, stark high-contrast, centered.
+
+13) Echo Capsule
+Effects
+- fire_rate_pct: +15%
+- damage_pct: +5%
+Icon prompt
+Black-and-white 1-bit capsule/pill with small ripple lines, minimalist glyph, centered.
+
+14) Nemesis Core
+Effects
+- damage_pct: +5%
+- damage_reduction_pct: +10%
+Icon prompt
+1-bit core orb with two orbits, implying pressure power, high contrast, centered.
+
+15) Predator’s Lunge
+Effects
+- move_speed_pct: +12%
+- devour_range_m: +1.0
+Icon prompt
+Black-and-white 1-bit forward arrow/claw swipe glyph, dynamic, centered, no background.
+
+16) Velocity Prism
+Effects
+- ray_visual_speed_pct: +60%
+- fire_rate_pct: +10%
+Icon prompt
+Minimal 1-bit prism emitting straight lines, geometric, high contrast, centered.
+
+17) Precision Matrix
+Effects
+- crit_chance_pct: +6%
+- crit_multiplier_pct: +20%
+Icon prompt
+1-bit crosshair/reticle with tiny grid hints, sharp, high-contrast, centered.
+
+18) Bloodwell Injector
+Effects
+- lifesteal_pct: +6%
+- hp_regen_flat: +1.5
+Icon prompt
+Monochrome 1-bit syringe silhouette with a droplet, bold glyph, centered, no background.
+
+19) Titan Plating
+Effects
+- max_hp_flat: +40
+- damage_reduction_pct: +12%
+Icon prompt
+1-bit shield/plate icon with hard facets, high contrast, centered, no background.
+
+20) Quickdraw Grip
+Effects
+- fire_rate_pct: +20%
+- move_speed_pct: +10%
+Icon prompt
+Black-and-white 1-bit pistol grip with motion lines, minimalist, high contrast, centered.

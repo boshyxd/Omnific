@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Texture2D" path="res://sprites/debug_sprite.png" id="1_tex"]
+[ext_resource type="Script" path="res://scripts/hit_debug.gd" id="2_scr"]
+
+[node name="HitDebug" type="Sprite3D"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+billboard = 2
+texture = ExtResource("1_tex")
+script = ExtResource("2_scr")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

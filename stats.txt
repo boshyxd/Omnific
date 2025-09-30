@@ -1,0 +1,77 @@
+Omnific — Stat List (Feed The Beast)
+
+Conventions
+- Keys use snake_case.
+- _pct = percentage-based modifier (additive within a stat category by default).
+- _flat = flat/absolute value.
+- Units suffixes: _m = meters, _s = seconds, _ms = milliseconds.
+
+Core hook stats (MVP-ready per plan)
+- damage_pct: Increases base weapon damage.
+- fire_rate_pct: Increases shots per second.
+- crit_chance_pct: Chance to crit.
+- crit_multiplier_pct: Increases crit damage multiplier (base ~200%).
+- lifesteal_pct: Heal for a % of damage dealt.
+- knockback_power_pct: Scales knockback impulse applied on hit.
+- ray_visual_speed_pct: Visual tracer/beam speed (cosmetic, feel-good).
+
+Offense (extended)
+- headshot_multiplier_pct: Extra damage on weakspots (if implemented).
+- armor_shred_pct: Temporarily reduces enemy damage resistance.
+- boss_damage_pct: Extra damage to elites/bosses.
+- overkill_carry_pct: Portion of excess damage transfers to a nearby target.
+- chain_count: Number of extra targets a shot can chain to (if chaining is added).
+- chain_range_m: Max range to seek next target for chaining.
+- explosion_on_kill_damage_pct: On-kill radial damage as % of base (if added).
+- explosion_on_kill_radius_m: Radius of that on-kill effect.
+- stagger_threshold_pct: Enemies become finisher-eligible at a higher HP%.
+- weakspot_size_pct: Makes weakspot hit detection more forgiving (if used).
+
+Tempo/Handling
+- recoil_recovery_pct: Faster return to aim baseline (if recoil is used).
+- swap_speed_pct: Faster weapon swap (future-proof if multiple weapons).
+- aim_move_penalty_pct: Reduces slow while aiming (if present).
+- heat_management_pct: Mitigates overheating/penalties (if heat system added).
+
+Devour-centric
+- devour_range_m: Effective range to trigger Devour.
+- devour_cast_speed_pct: Faster execution/animation, if any.
+- devour_heal_pct_maxhp: Heal as % of max HP on Devour.
+- devour_xp_bonus_pct: Extra XP granted by Devour.
+- devour_coin_bonus_pct: Extra coins granted by Devour.
+
+Survivability
+- max_hp_flat: Increases maximum HP.
+- hp_regen_flat: Passive HP per second.
+- heal_on_kill_flat: Flat heal per enemy killed.
+- damage_reduction_pct: Reduces incoming damage.
+- armor_flat: Flat damage reduction before % reductions.
+- iframes_duration_ms: Brief invulnerability after taking damage.
+- knockback_resistance_pct: Reduces knockback taken.
+
+Mobility
+- move_speed_pct: Increases movement speed.
+- acceleration_pct: Faster speed ramp-up.
+- sprint_speed_pct: Higher sprint speed (if sprinting is enabled).
+- jump_height_pct: Higher jumps (if relevant).
+
+Economy/Meta
+- xp_gain_pct: Increases XP from drops.
+- coin_gain_pct: Increases coins from drops.
+- luck_pct: Improves drop quality/elite odds (design-defined).
+- pickup_magnet_radius_m: Increases suction radius for XP/coins.
+- pickup_suction_speed_pct: Faster homing speed of pickups.
+- reroll_count: Extra rerolls when selecting upgrades.
+- choice_count_flat: Adds extra choices in upgrade selections.
+- elite_spawn_chance_pct: Increases elite frequency (risk lever).
+
+Control/Utility
+- slow_power_pct: Strength of slows you apply.
+- stun_duration_ms: Duration increase for any stuns you apply.
+- freeze_chance_pct: Chance to hard-freeze (if added, keep rare/capped).
+- taint_radius_m: Radius of a weakening aura (if added).
+- vision_contrast_boost: Purely visual UI/FX contrast boost.
+
+Notes
+- Recommended stacking: additive within each stat, multiplicative across stat groups to curb runaway scaling.
+- Suggested soft caps (tune later): fire_rate_pct after +150%, move_speed_pct after +60%, hard-CC chances capped around 60–80%.
